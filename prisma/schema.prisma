@@ -66,8 +66,8 @@ model Link {
   slug          String
   clicks        Int       @default(0)
   createdAt     DateTime  @default(now()) @map(name: "created_at")
-  owner         User      @relation(fields: [ownerId], references: [id])
-  ownerId       String
+  owner         User?     @relation(fields: [ownerId], references: [id])
+  ownerId       String?
 
   @@map(name: "links")
 }
