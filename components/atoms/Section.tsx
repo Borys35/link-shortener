@@ -8,7 +8,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 const Section: FC<Props> = ({ children, className, ...props }) => {
   return (
     <section
-      className={classNames("max-w-7xl mx-auto px-8 lg:px-12 py-24", className)}
+      className={classNames("content py-32 relative", className)}
       {...props}
     >
       {children}

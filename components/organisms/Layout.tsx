@@ -1,5 +1,7 @@
 import Head from "next/head";
 import { FC } from "react";
+import Footer from "./Footer";
+import Navbar from "./Navbar";
 
 interface Props {
   children: React.ReactNode;
@@ -8,13 +10,15 @@ interface Props {
 
 const Layout: FC<Props> = ({ children, pageTitle }) => {
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <Head>
         <title>{pageTitle} - SHRT</title>
         <meta name="description" content={pageTitle} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>{children}</main>
+      <Navbar />
+      <main className="flex-1">{children}</main>
+      <Footer />
     </div>
   );
 };

@@ -1,16 +1,27 @@
 import { NextPage } from "next";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Button from "../components/atoms/Button";
 import Heading from "../components/atoms/Heading";
 import Paragraph from "../components/atoms/Paragraph";
 import Section from "../components/atoms/Section";
-import Layout from "../components/Layout";
+import Layout from "../components/organisms/Layout";
 import arrowsImg from "../features/login/assets/arrows.png";
 
 const Login: NextPage = () => {
+  function handleLoginGitHub() {
+    signIn("github");
+  }
+  // function handleLoginApple() {
+  //   signIn("apple");
+  // }
+  function handleLoginGoogle() {
+    signIn("google");
+  }
+
   return (
     <Layout pageTitle="Login">
-      <div className="absolute right-0 top-0 -z-10 pl-8 opacity-20 lg:opacity-100">
+      <div className="absolute right-0 top-0 -z-10 pl-8 max-h-screen opacity-20 lg:opacity-100">
         <Image src={arrowsImg} alt="Arrows" />
       </div>
       <Section className="relative">
@@ -25,7 +36,7 @@ const Login: NextPage = () => {
             palette of statistics.
           </Paragraph>
           <div className="mt-16 flex flex-col gap-y-6 items-start">
-            <Button>
+            <Button onClick={handleLoginGoogle}>
               <svg
                 width="20"
                 height="20"
@@ -40,7 +51,7 @@ const Login: NextPage = () => {
               </svg>
               Continue with Google
             </Button>
-            <Button>
+            {/* <Button onClick={handleLoginApple}>
               <svg
                 width="17"
                 height="20"
@@ -54,8 +65,8 @@ const Login: NextPage = () => {
                 />
               </svg>
               Continue with Apple
-            </Button>
-            <Button>
+            </Button> */}
+            <Button onClick={handleLoginGitHub}>
               <svg
                 width="21"
                 height="21"

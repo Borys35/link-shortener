@@ -5,13 +5,17 @@
 @tailwind utilities;
 
 :root {
-  color: #0d347f;
+  color: theme("colors.text");
   background-color: theme("colors.bg.100");
 }
 
 @layer components {
   .box {
-    @apply shadow-sm rounded-lg bg-bg-50;
+    @apply shadow-md rounded-lg bg-bg-50;
+  }
+
+  .content {
+    @apply max-w-7xl mx-auto px-8 lg:px-12;
   }
 }
 

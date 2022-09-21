@@ -5,11 +5,13 @@ module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
+    "./features/**/components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
       colors: {
         bg: colors.slate,
+        text: "#0d347f",
         primary: {
           light: "#C4D4FA",
           hover: "#AEC3FB",

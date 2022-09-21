@@ -9,6 +9,7 @@ interface Props extends React.HTMLAttributes<HTMLElement> {
   toNewPage?: boolean;
   disabled?: boolean;
   variant?: "primary" | "secondary";
+  size?: "sm" | "md" | "lg" | "xl";
   contentOnly?: boolean;
   buttonType?: "click" | "add";
 }
@@ -18,7 +19,7 @@ const Arrow = () => (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     fill="currentColor"
-    className="w-6 h-6"
+    className="w-6 h-6 ml-5 group-hover:translate-x-4 transition-transform"
   >
     <path
       fillRule="evenodd"
@@ -33,7 +34,7 @@ const Plus = () => (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     fill="currentColor"
-    className="w-6 h-6"
+    className="w-6 h-6 mr-2"
   >
     <path
       fillRule="evenodd"
@@ -52,13 +53,18 @@ const Button: FC<Props> = ({
   variant = "primary",
   contentOnly = false,
   buttonType = "click",
+  size = "sm",
   className,
   ...props
 }) => {
   const classes = classNames(
-    "font-bold",
+    "font-bold group",
     { "text-primary": variant === "primary" },
     { "text-secondary": variant === "secondary" },
+    { "text-base": size === "sm" },
+    { "text-lg": size === "md" },
+    { "text-xl": size === "lg" },
+    { "text-2xl": size === "xl" },
     {
       "px-4 py-2 rounded-lg bg-primary-light hover:bg-primary-hover":
         contentOnly === false,
@@ -70,7 +76,7 @@ const Button: FC<Props> = ({
     className
   );
   const content = (
-    <span className="flex gap-x-4 items-center">
+    <span className="flex items-center">
       {buttonType === "add" && <Plus />}
       {children}
       {buttonType === "click" && <Arrow />}
