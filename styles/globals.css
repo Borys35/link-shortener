@@ -20,6 +20,10 @@
 }
 
 @layer base {
+  body {
+    @apply overflow-x-hidden;
+  }
+
   h1 {
     @apply text-6xl;
   }

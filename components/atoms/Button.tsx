@@ -19,7 +19,7 @@ const Arrow = () => (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     fill="currentColor"
-    className="w-6 h-6 ml-5 group-hover:translate-x-4 transition-transform"
+    className="w-6 h-6 ml-5 group-hover:translate-x-2 transition-transform"
   >
     <path
       fillRule="evenodd"
@@ -34,7 +34,7 @@ const Plus = () => (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     fill="currentColor"
-    className="w-6 h-6 mr-2"
+    className="w-6 h-6 mr-2 group-hover:rotate-90 group-hover:scale-125 transition-transform"
   >
     <path
       fillRule="evenodd"
@@ -58,7 +58,7 @@ const Button: FC<Props> = ({
   ...props
 }) => {
   const classes = classNames(
-    "font-bold group",
+    "font-bold group inline-block",
     { "text-primary": variant === "primary" },
     { "text-secondary": variant === "secondary" },
     { "text-base": size === "sm" },

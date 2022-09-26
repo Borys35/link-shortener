@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import Button from "../../../components/atoms/Button";
 import Input from "../../../components/atoms/Input";
@@ -5,10 +6,13 @@ import Input from "../../../components/atoms/Input";
 const ShorteningForm = () => {
   const [url, setUrl] = useState("");
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    console.log(url);
+    const a = await axios.post('/api/links/create', {
+      url
+    });
+    console.log(a);
   }
 
   function handleChange(e: any) {
