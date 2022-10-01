@@ -6,9 +6,10 @@ import Navbar from "./Navbar";
 interface Props {
   children: React.ReactNode;
   pageTitle: string;
+  showNavbarAndFooter?: boolean;
 }
 
-const Layout: FC<Props> = ({ children, pageTitle }) => {
+const Layout: FC<Props> = ({ children, pageTitle, showNavbarAndFooter=true }) => {
   return (
     <div className="flex flex-col min-h-screen">
       <Head>
@@ -16,9 +17,9 @@ const Layout: FC<Props> = ({ children, pageTitle }) => {
         <meta name="description" content={pageTitle} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar />
+      {showNavbarAndFooter && <Navbar />}
       <main className="flex-1">{children}</main>
-      <Footer />
+      {showNavbarAndFooter && <Footer />}
     </div>
   );
 };

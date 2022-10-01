@@ -11,7 +11,7 @@ interface Props extends React.HTMLAttributes<HTMLElement> {
   variant?: "primary" | "secondary";
   size?: "sm" | "md" | "lg" | "xl";
   contentOnly?: boolean;
-  buttonType?: "click" | "add";
+  buttonType?: "click" | "add" | "none";
 }
 
 const Arrow = () => (
