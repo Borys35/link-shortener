@@ -23,12 +23,17 @@ const Home: NextPage = () => {
               Shorten any link or sign up and get info about traffic of your
               short urls.
             </Paragraph>
-            <Button contentOnly={true} variant="secondary" size="xl">
-              Learn more
+            <Button
+              contentOnly={true}
+              variant="secondary"
+              size="xl"
+              to="/dashboard"
+            >
+              Dashboard
             </Button>
           </div>
 
-          <div className="-z-10 absolute -top-20 right-0 bottom-0 lg:bottom-auto w-7/12">
+          <div className="-z-10 absolute -top-24 right-0 bottom-0 lg:bottom-auto w-7/12">
             <Image
               src={hero}
               alt="Hero"
@@ -71,8 +76,13 @@ const Home: NextPage = () => {
             <Paragraph size="lg" className="mb-16">
               Receive data and analytics of your short links.
             </Paragraph>
-            <Button contentOnly={true} variant="secondary" size="xl">
-              Create account
+            <Button
+              contentOnly={true}
+              variant="secondary"
+              size="xl"
+              to="/login"
+            >
+              Set your account
             </Button>
           </div>
         </div>

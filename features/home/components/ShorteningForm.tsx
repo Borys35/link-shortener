@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from "axios";
 import { useRef, useState } from "react";
 import Button from "../../../components/atoms/Button";
 import Input from "../../../components/atoms/Input";
+import { slugToUrl } from "../../../utils/slugToUrl";
 
 const ShorteningForm = () => {
   const [url, setUrl] = useState("");
@@ -12,10 +13,13 @@ const ShorteningForm = () => {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    const response = await axios.post<any, AxiosResponse<{link: Link}>>("/api/links/create", {
-      url,
-    });
-    setShortUrl(window.location.hostname + `${process.env.NODE_ENV === 'development' && `:${window.location.port}`}/` + response.data.link.slug);
+    const response = await axios.post<any, AxiosResponse<{ link: Link }>>(
+      "/api/links/create",
+      {
+        url,
+      }
+    );
+    setShortUrl(slugToUrl(response.data.link.slug));
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
