@@ -9,13 +9,17 @@ import LinkItem from "./LinkItem";
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   links: (Link & { clicks: Click[] })[];
   linkIndex: number;
+  isNewLinkCreating: boolean;
   onLinkChange: (i: number) => void;
+  onAddClick: () => void;
 }
 
 const LinksSection: FC<Props> = ({
   links,
   linkIndex,
+  isNewLinkCreating,
   onLinkChange,
+  onAddClick,
   className,
   ...props
 }) => {
@@ -23,7 +27,9 @@ const LinksSection: FC<Props> = ({
     <div className={classNames("", className)} {...props}>
       <div className="flex justify-between items-center mb-8">
         <Heading level={5}>Links</Heading>
-        <Button buttonType="add">New</Button>
+        <Button buttonType="add" onClick={onAddClick}>
+          New
+        </Button>
       </div>
 
       <div className="flex flex-col gap-y-4">
@@ -39,6 +45,7 @@ const LinksSection: FC<Props> = ({
             onClick={() => onLinkChange(i)}
           />
         ))}
+        {isNewLinkCreating && <LinkItem name="New link..." selected={true} />}
       </div>
     </div>
   );

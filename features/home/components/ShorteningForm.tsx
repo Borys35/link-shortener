@@ -49,6 +49,7 @@ const ShorteningForm = () => {
         onChange={handleChange}
         className="md:w-80 lg:w-96"
         readOnly={!!shortUrl}
+        inputSize="large"
       />
       <Button
         buttonType={!shortUrl ? "add" : "none"}
