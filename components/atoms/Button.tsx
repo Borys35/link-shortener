@@ -19,7 +19,7 @@ const Arrow = () => (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     fill="currentColor"
-    className="w-6 h-6 ml-5 group-hover:translate-x-2 transition-transform"
+    className="w-6 h-6 ml-5 group-hover:translate-x-1 transition-transform"
   >
     <path
       fillRule="evenodd"

@@ -1,14 +1,13 @@
 import { Link } from "@prisma/client";
-import AppLink from "next/link";
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import Logo from "../assets/logo.svg";
 import Heading from "../components/atoms/Heading";
 import Layout from "../components/organisms/Layout";
 import SessionStatus from "../components/organisms/SessionStatus";
 import LinksSection from "../features/dashboard/components/links/LinksSection";
 import { NewLinkInputs } from "../features/dashboard/components/overview/NewLinkForm";
 import OverviewSection from "../features/dashboard/components/overview/OverviewSection";
+import Sidebar from "../features/dashboard/components/sidebar/Sidebar";
 import { createLink, getAllLinks } from "../lib/api";
 
 const links = [
@@ -71,15 +70,9 @@ const Dashboard = () => {
   return (
     <SessionStatus when="authenticated" replacePath="/login">
       <Layout pageTitle="Dashboard" showNavbarAndFooter={false}>
-        <div className="flex p-6 min-h-screen">
-          <aside className="self-stretch box flex flex-col items-center py-10 px-4">
-            <AppLink href="/">
-              <a>
-                <Logo />
-              </a>
-            </AppLink>
-          </aside>
-          <div className="flex-1 px-20 py-10">
+        <div className="relative flex p-6">
+          <Sidebar />
+          <div className="flex-1 ml-16 px-20 py-10">
             <Heading level={3} className="mb-24">
               Welcome to <span className="text-primary">Dashboard</span>!
             </Heading>
