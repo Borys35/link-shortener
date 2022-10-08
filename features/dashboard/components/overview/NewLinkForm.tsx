@@ -1,35 +1,31 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import axios, { AxiosResponse } from "axios";
+import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import * as yup from "yup";
 import Button from "../../../../components/atoms/Button";
 import Heading from "../../../../components/atoms/Heading";
 import Field from "../../../../components/molecules/Field";
+import { newLinkSchema } from "../../../../lib/yupSchemas";
 
-type Inputs = {
+export type NewLinkInputs = {
   name: string;
   url: string;
 };
 
-const schema = yup
-  .object({
-    name: yup.string().required(),
-    url: yup.string().url().required(),
-  })
-  .required();
+interface Props {
+  onCreateClick: (data: NewLinkInputs) => void;
+}
 
-const NewLinkForm = () => {
+const NewLinkForm: FC<Props> = ({ onCreateClick }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>({
-    resolver: yupResolver(schema),
+  } = useForm<NewLinkInputs>({
+    resolver: yupResolver(newLinkSchema),
   });
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const response = await axios.post<any, AxiosResponse<{}>>("url", data);
-    response.data;
+  const onSubmit: SubmitHandler<NewLinkInputs> = async (data) => {
+    onCreateClick(data);
   };
 
   return (

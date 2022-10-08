@@ -17,4 +17,10 @@ export default NextAuth({
   ],
   adapter: PrismaAdapter(prisma),
   secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async session({ session, user, token }) {
+      if (session.user) session.user.id = user.id;
+      return session;
+    },
+  },
 });

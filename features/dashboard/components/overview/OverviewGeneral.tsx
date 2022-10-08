@@ -24,19 +24,29 @@ const OverviewGeneral: FC<Props> = ({ currentLink }) => {
           {new Intl.DateTimeFormat("en", {
             dateStyle: "full",
             timeStyle: "long",
-          }).format(createdAt)}
+          }).format(new Date(createdAt.toString()))}
         </span>
       </div>
       <div className="box px-8 py-5">
         <div className="mb-5">
           <Caption className="block mb-1">Short link</Caption>
-          <a href={slugToUrl(slug)} className="text-lg underline">
+          <a
+            href={`/${slug}`}
+            target="_blank"
+            rel="noreferrer"
+            className="text-lg underline"
+          >
             {slugToUrl(slug)}
           </a>
         </div>
         <div>
           <Caption className="block mb-1">Destination</Caption>
-          <a href={`${url}`} className="text-lg underline">
+          <a
+            href={`${url}`}
+            target="_blank"
+            rel="noreferrer"
+            className="text-lg underline"
+          >
             {url}
           </a>
         </div>

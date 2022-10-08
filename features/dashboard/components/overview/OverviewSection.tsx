@@ -2,18 +2,20 @@ import { Link } from "@prisma/client";
 import classNames from "classnames";
 import { FC } from "react";
 import Heading from "../../../../components/atoms/Heading";
-import NewLinkForm from "./NewLinkForm";
+import NewLinkForm, { NewLinkInputs } from "./NewLinkForm";
 import OverviewGeneral from "./OverviewGeneral";
 import OverviewStats from "./OverviewStats";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   currentLink?: Link;
   newLink?: Partial<Link> | null;
+  onCreateClick: (data: NewLinkInputs) => void;
 }
 
 const OverviewSection: FC<Props> = ({
   currentLink,
   newLink,
+  onCreateClick,
   className,
   ...props
 }) => {
@@ -25,7 +27,7 @@ const OverviewSection: FC<Props> = ({
           <OverviewStats currentLink={currentLink as any} />
         </div>
       ) : newLink ? (
-        <NewLinkForm />
+        <NewLinkForm onCreateClick={onCreateClick} />
       ) : (
         <Heading level={5}>There is no link selected.</Heading>
       )}

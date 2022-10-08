@@ -1,12 +1,15 @@
 import { Link } from "@prisma/client";
 import AppLink from "next/link";
 import { useState } from "react";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import Logo from "../assets/logo.svg";
 import Heading from "../components/atoms/Heading";
 import Layout from "../components/organisms/Layout";
 import SessionStatus from "../components/organisms/SessionStatus";
 import LinksSection from "../features/dashboard/components/links/LinksSection";
+import { NewLinkInputs } from "../features/dashboard/components/overview/NewLinkForm";
 import OverviewSection from "../features/dashboard/components/overview/OverviewSection";
+import { createLink, getAllLinks } from "../lib/api";
 
 const links = [
   {
@@ -42,14 +45,27 @@ const Dashboard = () => {
   const [linkIndex, setLinkIndex] = useState(-1);
   const [newLink, setNewLink] = useState<Partial<Link> | null>(null);
 
+  const queryClient = useQueryClient();
+  const linksQuery = useQuery("links", getAllLinks);
+  const linksMutation = useMutation(createLink, {
+    onSuccess() {
+      queryClient.invalidateQueries("links");
+    },
+  });
+
   function handleChangeLink(i: number) {
     setNewLink(null);
     setLinkIndex(i);
   }
 
   function handleAddNewLink() {
-    setLinkIndex(-1);
     setNewLink({ name: "", url: "" });
+    setLinkIndex(-1);
+  }
+
+  function handleCreateNewLink(data: NewLinkInputs) {
+    linksMutation.mutate(data);
+    setNewLink(null);
   }
 
   return (
@@ -69,15 +85,16 @@ const Dashboard = () => {
             </Heading>
             <div className="grid grid-cols-3 gap-24">
               <LinksSection
-                links={links}
+                links={linksQuery.data?.links || []}
                 linkIndex={linkIndex}
                 isNewLinkCreating={!!newLink}
                 onLinkChange={handleChangeLink}
                 onAddClick={handleAddNewLink}
               />
               <OverviewSection
-                currentLink={links[linkIndex]}
+                currentLink={linksQuery.data?.links[linkIndex]}
                 newLink={newLink}
+                onCreateClick={handleCreateNewLink}
                 className="col-start-2 col-end-4"
               />
             </div>

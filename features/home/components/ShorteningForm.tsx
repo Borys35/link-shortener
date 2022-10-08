@@ -15,9 +15,7 @@ const ShorteningForm = () => {
 
     const response = await axios.post<any, AxiosResponse<{ link: Link }>>(
       "/api/links/create",
-      {
-        url,
-      }
+      { url }
     );
     setShortUrl(slugToUrl(response.data.link.slug));
   }
