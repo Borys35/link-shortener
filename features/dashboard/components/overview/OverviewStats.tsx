@@ -14,6 +14,19 @@ import { Line } from "react-chartjs-2";
 import Caption from "../../../../components/atoms/Caption";
 import Heading from "../../../../components/atoms/Heading";
 
+const WEEKDAYS = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+const MINUTE = 1000 * 60;
+const HOUR = MINUTE * 60;
+const DAY = HOUR * 24;
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -31,6 +44,27 @@ interface Props {
 const OverviewStats: FC<Props> = ({ currentLink }) => {
   const { clicks } = currentLink;
 
+  const now = new Date();
+  console.log("today", now.getDay());
+
+  function getLastWeekClicks() {
+    const data = [];
+
+    for (let i = 0; i <= 6; i++) {
+      const filteredClicks = clicks.filter((click) => {
+        const nowDays = Math.round(new Date().getTime() / DAY - i);
+        const clickDays = Math.round(
+          new Date(click.clickedAt.toString()).getTime() / DAY
+        );
+
+        return nowDays === clickDays;
+      });
+      data.push(filteredClicks.length);
+    }
+
+    return data;
+  }
+
   return (
     <div>
       <Heading level={5} className="mb-8">
@@ -44,8 +78,15 @@ const OverviewStats: FC<Props> = ({ currentLink }) => {
           <div className="w-4/5">
             <Line
               data={{
-                labels: ["d", "a"],
-                datasets: [{ label: "A", data: [4, 7] }],
+                labels: WEEKDAYS,
+                datasets: [
+                  {
+                    label: "Total clicks",
+                    data: getLastWeekClicks(),
+                    borderColor: "#FF4042",
+                    backgroundColor: "#F4D1D4",
+                  },
+                ],
               }}
             />
           </div>

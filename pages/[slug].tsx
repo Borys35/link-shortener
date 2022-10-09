@@ -15,15 +15,18 @@ export const getServerSideProps: GetServerSideProps = async (
     where: { slug: params.slug?.toString() },
   });
 
-  if (foundLink)
-    return {
-      redirect: {
-        destination: foundLink.url,
-        permanent: true,
-      },
-    };
+  if (!foundLink) return { notFound: true };
 
-  return { notFound: true };
+  await prisma.click.create({
+    data: { linkId: foundLink.id, country: "Unknown" },
+  });
+
+  return {
+    redirect: {
+      destination: foundLink.url,
+      permanent: true,
+    },
+  };
 };
 
 const Redirect = () => {
