@@ -4,7 +4,7 @@ import Paragraph from "../atoms/Paragraph";
 
 const Footer = () => {
   return (
-    <footer className="content w-full py-6 flex justify-between">
+    <footer className="content w-full py-6 flex flex-col md:flex-row gap-y-4 justify-between">
       <Link href="/">
         <a>
           <Logo />

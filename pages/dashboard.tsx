@@ -72,11 +72,11 @@ const Dashboard = () => {
       <Layout pageTitle="Dashboard" showNavbarAndFooter={false}>
         <div className="relative flex p-6">
           <Sidebar />
-          <div className="flex-1 ml-16 px-20 py-10">
+          <div className="flex-1 md:ml-16 md:px-20 py-10">
             <Heading level={3} className="mb-24">
               Welcome to <span className="text-primary">Dashboard</span>!
             </Heading>
-            <div className="grid grid-cols-3 gap-24">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-24">
               <LinksSection
                 links={linksQuery.data?.links || []}
                 linkIndex={linkIndex}
@@ -88,7 +88,7 @@ const Dashboard = () => {
                 currentLink={linksQuery.data?.links[linkIndex]}
                 newLink={newLink}
                 onCreateClick={handleCreateNewLink}
-                className="col-start-2 col-end-4"
+                className="lg:col-start-2 lg:col-end-4"
               />
             </div>
           </div>
