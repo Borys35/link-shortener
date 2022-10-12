@@ -16,6 +16,7 @@ export default NextAuth({
     }),
   ],
   adapter: PrismaAdapter(prisma),
+  debug: true, // to remove
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async session({ session, user, token }) {
