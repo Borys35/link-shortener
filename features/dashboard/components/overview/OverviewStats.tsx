@@ -45,24 +45,29 @@ const OverviewStats: FC<Props> = ({ currentLink }) => {
   const { clicks } = currentLink;
 
   const now = new Date();
-  console.log("today", now.getDay());
+  const days = [
+    ...[...WEEKDAYS].slice(now.getDay() + 1 <= 6 ? now.getDay() + 1 : 0),
+    ...[...WEEKDAYS].slice(0, now.getDay() + 1 <= 6 ? now.getDay() + 1 : 0),
+  ];
 
   function getLastWeekClicks() {
     const data = [];
 
     for (let i = 0; i <= 6; i++) {
       const filteredClicks = clicks.filter((click) => {
-        const nowDays = Math.round(new Date().getTime() / DAY - i);
-        const clickDays = Math.round(
+        const nowDays = Math.ceil(now.getTime() / DAY - i);
+        const clickDays = Math.ceil(
           new Date(click.clickedAt.toString()).getTime() / DAY
         );
+
+        console.log(nowDays, clickDays);
 
         return nowDays === clickDays;
       });
       data.push(filteredClicks.length);
     }
 
-    return data;
+    return data.reverse();
   }
 
   return (
@@ -78,7 +83,7 @@ const OverviewStats: FC<Props> = ({ currentLink }) => {
           <div className="w-4/5">
             <Line
               data={{
-                labels: WEEKDAYS,
+                labels: days,
                 datasets: [
                   {
                     label: "Total clicks",

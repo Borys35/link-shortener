@@ -11,19 +11,19 @@ datasource db {
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
+  id                       String  @id @default(cuid())
+  userId                   String
+  type                     String
+  provider                 String
+  providerAccountId        String
+  refresh_token            String? @db.Text
   refresh_token_expires_in Int?
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
+  access_token             String? @db.Text
+  expires_at               Int?
+  token_type               String?
+  scope                    String?
+  id_token                 String? @db.Text
+  session_state            String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -58,20 +58,20 @@ model VerificationToken {
 }
 
 model Link {
-  id            String    @default(cuid()) @id @unique
-  name          String?
-  url           String
-  slug          String
-  clicks        Click[]
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  owner         User?     @relation(fields: [ownerId], references: [id])
-  ownerId       String?
+  id        String   @id @unique @default(cuid())
+  name      String?
+  url       String
+  slug      String
+  clicks    Click[]
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  owner     User?    @relation(fields: [ownerId], references: [id])
+  ownerId   String?
 }
 
 model Click {
-  id            String    @default(cuid()) @id
-  clickedAt     DateTime  @default(now()) @map(name: "clicked_at")
-  country       String
-  link          Link?     @relation(fields: [linkId], references: [id])
-  linkId        String?
+  id        String   @id @default(cuid())
+  clickedAt DateTime @default(now()) @map(name: "clicked_at")
+  country   String
+  link      Link?    @relation(fields: [linkId], references: [id])
+  linkId    String?
 }

@@ -37,7 +37,7 @@ const Sidebar = () => {
 
       <aside
         className={classNames(
-          "fixed top-6 bottom-6 box md:flex flex-col items-center justify-between py-10 px-4 z-20",
+          "fixed left-4 top-10 bottom-6 box md:flex flex-col items-center justify-between py-10 px-4 z-20",
           { flex: open },
           { hidden: !open }
         )}
