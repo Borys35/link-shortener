@@ -14,7 +14,7 @@ const ShorteningForm = () => {
     e.preventDefault();
 
     const response = await axios.post<any, AxiosResponse<{ link: Link }>>(
-      "/api/links/create",
+      "/api/links/create-anonymously",
       { url }
     );
     setShortUrl(slugToUrl(response.data.link.slug));
