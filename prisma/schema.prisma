@@ -1,6 +1,8 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// Using PostgreSQL hosted on neon.tech
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -41,8 +43,8 @@ model Session {
 model User {
   id            String    @id @default(cuid())
   name          String?
-  boryskac10         String?   @unique
-  boryskac10Verified DateTime?
+  email         String?   @unique
+  emailVerified DateTime?
   image         String?
   links         Link[]
   accounts      Account[]
